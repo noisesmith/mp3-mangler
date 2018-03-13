@@ -72,7 +72,8 @@ namespace {
   {
     std::ifstream is("test.mp3", std::ifstream::binary);
     std::ofstream os("dup.mp3", std::ofstream::binary);
-    auto f = [](char c) {return c;};
+    // auto f = [](char c) {return c;};
+    auto f = [](char c) {return c^1;};
     EXPECT_EQ(mp3::process_frames(is, os, f), 0);
   }
 }
