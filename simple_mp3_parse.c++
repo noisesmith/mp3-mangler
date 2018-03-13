@@ -4,15 +4,15 @@
 
 int main(int argc, char **argv) {
   // input
-  std::streambuf* ibuf;
+  std::istream *input;
   if(argc > 1) {
     std::cerr << "reading " << argv[1] << std::endl;
     std::ifstream finput(argv[1], std::ifstream::binary);
-    ibuf = finput.rdbuf();
+    input = &finput;
   } else {
-    ibuf = std::cin.rdbuf();
+    std::cerr << "reading stdin" << std::endl;
+    input = &std::cin;
   }
-  std::istream input(ibuf);
   // output
   std::streambuf* obuf;
   if(argc > 2) {
@@ -21,10 +21,11 @@ int main(int argc, char **argv) {
     std::ofstream foutput(argv[2], std::ofstream::binary);
     obuf = foutput.rdbuf();
   } else {
+    std::cerr << "writing stdout" << std::endl;
     obuf = std::cout.rdbuf();
   }
   std::ostream output(obuf);
   auto f = [](char c){ return c^1; };
-  mp3::process_frames(input, output, f);
+  mp3::process_frames(*input, output, f);
   return 0;
 }
