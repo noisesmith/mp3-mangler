@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mplayer -ao pcm:fast:file=dupcleand.wav dup.mp3
