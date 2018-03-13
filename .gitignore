@@ -1,6 +1,7 @@
+simple_mp3_parse
+ex_test
 *.swp
 *.o
-ex_test
-dup.mp3
-test.mp3
-test.wav
+*.gch
+*.mp3
+*.wav
