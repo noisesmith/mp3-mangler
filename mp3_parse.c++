@@ -43,7 +43,7 @@ namespace mp3
     }
   }
 
-  int pass_through(std::ifstream& is, std::ofstream& os)
+  int process_frames(std::ifstream& is, std::ofstream& os, std::function<char(char)> f)
   {
     std::vector<struct Header> headers;
     char c;
@@ -61,7 +61,7 @@ namespace mp3
         os.put(c);
       } else {
           data->push_back(c);
-          os.put(c ^ 0x01);
+          os.put(f(c));
       }
       if (header->size() == 4) {
         uint32_t data = (header->at(0) << 24);

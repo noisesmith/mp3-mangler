@@ -68,10 +68,11 @@ namespace {
     EXPECT_EQ(bitrates( -1,  -1,  -1,   -1,  -1,  -1), get_bitrate_row(15));
   }
 
-  TEST(mp3_parse, pass_through)
+  TEST(mp3_parse, process_frames)
   {
     std::ifstream is("test.mp3", std::ifstream::binary);
     std::ofstream os("dup.mp3", std::ofstream::binary);
-    EXPECT_EQ(mp3::pass_through(is, os), 0);
+    auto f = [](char c) {return c;};
+    EXPECT_EQ(mp3::process_frames(is, os, f), 0);
   }
 }
