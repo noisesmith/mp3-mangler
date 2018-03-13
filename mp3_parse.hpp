@@ -114,5 +114,5 @@ namespace mp3
 
   bool get_header(uint32_t bytes, std::vector<struct Header> header_container);
 
-  int process_frames(std::ifstream& is, std::ofstream& os, std::function<char(char)> f);
+  int process_frames(std::istream& is, std::ostream& os, std::function<char(char)> f);
 }

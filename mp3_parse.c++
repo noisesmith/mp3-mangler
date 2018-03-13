@@ -43,7 +43,7 @@ namespace mp3
     }
   }
 
-  int process_frames(std::ifstream& is, std::ofstream& os, std::function<char(char)> f)
+  int process_frames(std::istream& is, std::ostream& os, std::function<char(char)> f)
   {
     std::vector<struct Header> headers;
     char c;

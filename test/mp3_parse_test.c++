@@ -71,9 +71,16 @@ namespace {
   TEST(mp3_parse, process_frames)
   {
     std::ifstream is("test.mp3", std::ifstream::binary);
-    std::ofstream os("dup.mp3", std::ofstream::binary);
-    // auto f = [](char c) {return c;};
-    auto f = [](char c) {return c^1;};
-    EXPECT_EQ(mp3::process_frames(is, os, f), 0);
+    std::istream input(is.rdbuf());
+    std::ofstream os("copy.mp3", std::ofstream::binary);
+    std::ostream output(os.rdbuf());
+    auto f = [](char c) {return c;};
+    EXPECT_EQ(mp3::process_frames(input, output, f), 0);
+    std::ifstream is2("test.mp3", std::ifstream::binary);
+    std::istream input2(is2.rdbuf());
+    std::ofstream osdup("modified.mp3", std::ofstream::binary);
+    std::ostream output2(osdup.rdbuf());
+    auto g = [](char c) {return c^1;};
+    EXPECT_EQ(mp3::process_frames(input2, output2, g), 0);
   }
 }
