@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 #include <fstream>
+#include <functional>
 
 #define T(A, B) std::make_tuple(A, B)
 
